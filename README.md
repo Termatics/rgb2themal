@@ -15,7 +15,7 @@ This repository is for training models that convert RGB images to thermal images
 5. [Testing](#testing)
    - [Unpaired: CycleGAN](#testing-cyclegan)
    - [Paired: Pix2Pix](#testing-pix2pix)
-6. [Download Pre-trained Models](#download-pre-trained-models)
+6. [Download Datasets and Trained Models](#download-trained-models)
 
 ---
 
@@ -137,8 +137,10 @@ python test.py --dataroot ./datasets/rgb2thermal_pix2pix_datasets --direction At
 
 ---
 
-## Download Pre-trained Models
+## Download Trained Models
 
 The datasets and trained models for CycleGAN and Pix2Pix can be downloaded from the following [Google Drive link](https://drive.google.com/drive/folders/18QJaQ-h_MefTEfjMUPvytXDEaCUB_sTc?usp=sharing).
+
+The trained models can be used as pre-trained model in future training.
 
 ---

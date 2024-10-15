@@ -73,6 +73,8 @@ To combine images from domain A and B, use:
 python datasets/combine_A_and_B.py --fold_A path_to_A --fold_B path_to_B
 ```
 
+(Update) A cleaned and structured Karlsruhe Dataset has been used for pix2pix training. The dataset can be downloaded through the link at the end.
+
 ---
 
 ## Training

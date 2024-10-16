@@ -70,8 +70,10 @@ Organize the paired dataset with the following structure:
 
 To combine images from domain A and B, use:
 ```bash
-python datasets/combine_A_and_B.py --fold_A path_to_A --fold_B path_to_B
+python datasets/combine_A_and_B.py --fold_A /path/to/data/A --fold_B /path/to/data/B --fold_AB /path/to/data
 ```
+This will combine each pair of images (A,B) into a single image file, ready for training.
+
 
 (Update) A cleaned and structured Karlsruhe Dataset has been used for pix2pix training. The dataset can be downloaded through the link at the end.
 

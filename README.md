@@ -109,7 +109,7 @@ python train.py --dataroot "path_to_datasets" --name "model_name" --model pix2pi
 ```
 Example:
 ```bash
-python train.py --dataroot ./datasets/rgb2thermal_pix2pix_datasets --name rgb2thermal_pix2pix --model pix2pix --direction AtoB
+python train.py --dataroot ./datasets/rgb2thermal_pix2pix_datasets --name rgb2thermal_pix2pix --model pix2pix --direction AtoB --display_id -1
 ```
 
 ---

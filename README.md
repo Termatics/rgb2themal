@@ -15,7 +15,9 @@ This repository is for training models that convert RGB images to thermal images
 5. [Testing](#testing)
    - [Unpaired: CycleGAN](#testing-cyclegan)
    - [Paired: Pix2Pix](#testing-pix2pix)
-6. [Download Datasets and Trained Models](#download-trained-models)
+6. [Fine-tuning](#fine-tuning)
+7. [Adding a New Dataset](#adding-a-new-dataset)
+8. [Download Datasets and Trained Models](#download-trained-models)
 
 ---
 
@@ -138,6 +140,47 @@ Example:
 ```bash
 python test.py --dataroot ./datasets/rgb2thermal_pix2pix_datasets --direction AtoB --model pix2pix --name rgb2thermal_pix2pix
 ```
+---
+
+## Fine-tuning
+
+Fine-tuning allows you to further train a pre-trained model or resume training after interruption.  
+
+### Steps for Fine-tuning:
+1. Use the `--continue_train` flag to resume from a pre-trained model:
+   ```bash
+   python train.py --dataroot "path_to_new_datasets" --name "model_name" --model pix2pix --continue_train --epoch_count <starting_epoch>
+   ```
+   By default, the program will initialize the epoch count as 1. Set --epoch_count <int> to specify a different starting epoch count. Example (starting from epoch 101, previous training ends at epoch 100):
+   ```bash
+   python train.py --dataroot ./datasets/new_dataset --name rgb2thermal_pix2pix --model pix2pix --direction AtoB --continue_train --epoch_count 101
+   ```
+
+2. Lower the learning rate for fine-tuning (recommended):
+   ```bash
+   python train.py --dataroot ./datasets/new_dataset --name rgb2thermal_pix2pix --model pix2pix --direction AtoB --continue_train --lr 0.00005
+   ```
+
+3. Ensure training and testing configurations are consistent (e.g., `--netG`, `--norm`, `--no_dropout`).
+
+---
+
+## Adding a New Dataset
+
+1. **Organize the dataset**: Follow the format for CycleGAN or Pix2Pix as described in [Dataset Preparation](#dataset-preparation).
+2. **Generate Pix2Pix paired data**: Combine RGB and Thermal images using:
+   ```bash
+   python datasets/combine_A_and_B.py --fold_A ./datasets/new_paired_dataset/A                                       --fold_B ./datasets/new_paired_dataset/B                                       --fold_AB ./datasets/new_paired_dataset
+   ```
+3. **Train with the new dataset**:
+   - For CycleGAN:
+     ```bash
+     python train.py --dataroot ./datasets/new_unpaired_dataset --name new_cyclegan_model --model cycle_gan
+     ```
+   - For Pix2Pix:
+     ```bash
+     python train.py --dataroot ./datasets/new_paired_dataset --name new_pix2pix_model --model pix2pix --direction AtoB
+     ```
 
 ---
 

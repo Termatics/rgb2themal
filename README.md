@@ -16,8 +16,7 @@ This repository is for training models that convert RGB images to thermal images
    - [Unpaired: CycleGAN](#testing-cyclegan)
    - [Paired: Pix2Pix](#testing-pix2pix)
 6. [Fine-tuning](#fine-tuning)
-7. [Adding a New Dataset](#adding-a-new-dataset)
-8. [Download Datasets and Trained Models](#download-trained-models)
+7. [Download Datasets and Trained Models](#download-trained-models)
 
 ---
 
@@ -147,7 +146,8 @@ python test.py --dataroot ./datasets/rgb2thermal_pix2pix_datasets --direction At
 Fine-tuning allows you to further train a pre-trained model or resume training after interruption.  
 
 ### Steps for Fine-tuning:
-1. Use the `--continue_train` flag to resume from a pre-trained model:
+You can use the original dataset or a new dataset. If a new dataset is used, dataset need to follow the format for CycleGAN or Pix2Pix as described in [Dataset Preparation](#dataset-preparation).
+1. Use the `--continue_train` flag to resume from a pre-trained model. :
    ```bash
    python train.py --dataroot "path_to_new_datasets" --name "model_name" --model pix2pix --continue_train --epoch_count <starting_epoch>
    ```
@@ -156,7 +156,7 @@ Fine-tuning allows you to further train a pre-trained model or resume training a
    python train.py --dataroot ./datasets/new_dataset --name rgb2thermal_pix2pix --model pix2pix --direction AtoB --continue_train --epoch_count 101
    ```
 
-2. Lower the learning rate for fine-tuning (recommended):
+2. Lower the learning rate for fine-tuning(default learning rate is 0.0002, can be found in `train_options.py`):
    ```bash
    python train.py --dataroot ./datasets/new_dataset --name rgb2thermal_pix2pix --model pix2pix --direction AtoB --continue_train --lr 0.00005
    ```
@@ -165,24 +165,6 @@ Fine-tuning allows you to further train a pre-trained model or resume training a
 
 ---
 
-## Adding a New Dataset
-
-1. **Organize the dataset**: Follow the format for CycleGAN or Pix2Pix as described in [Dataset Preparation](#dataset-preparation).
-2. **Generate Pix2Pix paired data**: Combine RGB and Thermal images using:
-   ```bash
-   python datasets/combine_A_and_B.py --fold_A ./datasets/new_paired_dataset/A --fold_B ./datasets/new_paired_dataset/B --fold_AB ./datasets/new_paired_dataset
-   ```
-3. **Train with the new dataset**:
-   - For CycleGAN:
-     ```bash
-     python train.py --dataroot ./datasets/new_unpaired_dataset --name new_cyclegan_model --model cycle_gan
-     ```
-   - For Pix2Pix:
-     ```bash
-     python train.py --dataroot ./datasets/new_paired_dataset --name new_pix2pix_model --model pix2pix --direction AtoB
-     ```
-
----
 
 ## Download Trained Models
 

@@ -170,7 +170,7 @@ Fine-tuning allows you to further train a pre-trained model or resume training a
 1. **Organize the dataset**: Follow the format for CycleGAN or Pix2Pix as described in [Dataset Preparation](#dataset-preparation).
 2. **Generate Pix2Pix paired data**: Combine RGB and Thermal images using:
    ```bash
-   python datasets/combine_A_and_B.py --fold_A ./datasets/new_paired_dataset/A                                       --fold_B ./datasets/new_paired_dataset/B                                       --fold_AB ./datasets/new_paired_dataset
+   python datasets/combine_A_and_B.py --fold_A ./datasets/new_paired_dataset/A --fold_B ./datasets/new_paired_dataset/B --fold_AB ./datasets/new_paired_dataset
    ```
 3. **Train with the new dataset**:
    - For CycleGAN:
